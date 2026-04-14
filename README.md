@@ -23,7 +23,7 @@ conda --version
 ```
 
 ### 1.2 数据解压与合并
-openscene_data.tar.gz数据压缩包为作者自己制作的轻量化mini数据集，可以先看DiffusionDrive/download中的download_mini.sh和download_maps.sh，包含1个元数据文件+32个camera数据+32个lidar数据+nuplan_map文件，每个文件大小约为3.3G，这样下载会消耗巨大的时间成功和储存空间，为了轻量化复现，在作者制作的这个压缩包中包含1个元数据文件+1个camera数据+1个lidar数据+nuplan_map文件。但是压缩过后有10G左右，所以还是建议根据教程的方法自行下载然后解压整理成标准目录。
+openscene_data.tar.gz数据压缩包为作者自己制作的轻量化mini数据集，可以先看`DiffusionDrive/download中的download_mini.sh`和`download_maps.sh`，包含1个元数据文件+32个camera数据+32个lidar数据+nuplan_map文件，每个文件大小约为3.3G，这样下载会消耗巨大的时间成功和储存空间，为了轻量化复现，在作者制作的这个压缩包中包含1个元数据文件+1个camera数据+1个lidar数据+nuplan_map文件。但是压缩过后有10G左右，所以还是建议根据教程的方法自行下载然后解压整理成标准目录。
 
 ```bash
 # 解压数据压缩包，最好先进入到DiffusionDrive项目根目录
@@ -177,7 +177,7 @@ wget -O $OPENSCENE_DATA_ROOT/pretrained/kmeans_navsim_traj_20.npy \
 
 然后到此一定要整理成1.2中的标准格式！！！并且要注意在`DiffusionDrive/openscene_data/sensor_blobs/mini`下的数据不要区分成camera和lidar，要将这两个的数据都整理进对应名称的以场景为名字的文件夹中，上述1.2中的整理其实就是在进行这个操作。
 
-并且在Resnet-34和20个聚类Anchor下载完成后还需要修改一下代码文件中的配置路径（注意要写绝对路径），打开 navsim/agents/diffusiondrive/transfuser_config.py，修改第 18-19 行：
+并且在Resnet-34和20个聚类Anchor下载完成后还需要修改一下代码文件中的配置路径（注意要写绝对路径），打开` navsim/agents/diffusiondrive/transfuser_config.py`，修改第 18-19 行：
 
 ```bash
 bkb_path: str = "/root/DiffusionDrive/openscene_data/pretrained/resnet34.bin"
@@ -186,8 +186,7 @@ plan_anchor_path: str = "/root/DiffusionDrive/openscene_data/pretrained/kmeans_n
 
 ## 四、数据集缓存
 ### 4.1 修改缓存配置文件
-因仅下载OpenScene mini子集的部分数据，需修改navmini.yaml配置文件，指定实际下载的场景log名称：
-`/root/DiffusionDrive/navsim/planning/script/config/common/train_test_split/scene_filter/navmini.yaml`
+因仅下载OpenScene mini子集的部分数据，需修改navmini.yaml配置文件，指定实际下载的场景log名称：`/root/DiffusionDrive/navsim/planning/script/config/common/train_test_split/scene_filter/navmini.yaml`，并且由于我们只下载了两个场景的数据集，所以需要把tokens部分全部删掉。
 
 ```yaml
 max_scenes: null
