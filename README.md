@@ -95,6 +95,8 @@ conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=
 pip install -e .
 # 安装 DiffusionDrive 额外依赖，但是这里要注意版本问题，如果直接这样安装最新版的diffuser可能和xpu不兼容
 pip install diffusers einops
+# 最好指定版本，作者自己用的版本现在已经忘记了，可以等后面缓存的时候再调试
+pip install diffusers==0.29.2 einops==0.7.0
 ```
 
 ### 2.3 设置项目环境变量
