@@ -84,9 +84,14 @@ git clone https://github.com/hustvl/DiffusionDrive.git
 # 如果网络问题克隆不成功最好使用清华镜像或者win上下载了传输进去
 # 进入DiffusionDrive项目目录
 cd DiffusionDrive
-conda env create --name navsim -f environment.yml
+# 接受 main 频道的服务条款
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+# 接受 r 频道的服务条款
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+conda create -n navsim python=3.9 -y
 conda activate navsim
-pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install -e .
 # 安装 DiffusionDrive 额外依赖，但是这里要注意版本问题，如果直接这样安装最新版的diffuser可能和xpu不兼容
 pip install diffusers einops
